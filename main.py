@@ -29,50 +29,41 @@ def main():
       break
     else:
       print("That is not a valid option.")
-
-
-
-# Create a function called display_tasks that takes a list of taks and
-# displays every task in the list.
 def display_tasks(tasks):
- #display tasks on list with intervals
- print(tasks)
- return tasks
-def add_tasks():
-  #ask the user for new tasks
-  new_tasks =[]
-  Title = input("What task would you like to add?")
-  Description = input("Add description of your tasks:")
-  Date = input("Add the to-do date")
-  #put all into another list
-  new_tasks = [Title,Description,Date]
+    
+  index = 1  # Initialize task numbering at 1
+  for task in tasks:  # Iterate over the list of tasks
+    print(f"\nTask {index}:")  # Display task number
+    print(f"Title: {task[0]}")  # Display task title
+    print(f"Description: {task[1]}")  # Display task description
+    print(f"Due Date: {task[2]}")  # Display task due date
+    print(f"Status: {task[3]}")  # Display task status
+    index += 1  # Increment task numbering
 
-  #add new task to the list via appending
-  test.append("new_tasks")
-  tasks.append(new_tasks)
+def add_tasks(tasks):
+    title = input("Enter task title: ")  # Get task title from user
+    description = input("Enter task description: ")  # Get task description from user
+    due_date = input("Enter due date (YYYY-MM-DD): ")  # Get due date from user
+    task = (title, description, due_date, "Incomplete")  # Create task tuple
+    tasks.append(task)  # Add task tuple to the list
+    return tasks  # Return updated task list
 
-  #return the update list
-  return tasks
-
-#function for complete task
 def complete(tasks):
-  #display the 0 index  of each index in tasks
-  for title in tasks:
-    print(title[0])
-  #prompt user to choose task
-  utask = input("Which task would you like to mark as complete?")
-  if not utask.isdigit():
-    utask = input("Please choose a numbered task ")
-  if utask.isdigit():
-    index = int(utask) - 1
-    for i in range(tasks.len()):
-     #change the status to complete
-     tasks[index][3] = "complete"
-     break
-  
-
- 
-  
+    if not tasks:  # Check if task list is empty
+        print("No tasks available to mark as complete.")  # Inform user of no tasks
+        return tasks  # Return task list unchanged
+    display_tasks(tasks)  # Display all tasks for selection
+    try:
+        index = int(input("Enter the task number to mark as complete: ")) - 1  # Get task number, adjust for index
+        if 0 <= index < len(tasks):  # Check if task number is valid
+            task = tasks[index]  # Get selected task
+            tasks[index] = (task[0], task[1], task[2], "Complete")  # Update status to complete
+            print(f"Task '{task[0]}' marked as complete.")  # Confirm task completion
+        else:
+            print("Invalid task number.")  # Inform user of invalid selection
+    except ValueError:  # Catch non-numeric input errors
+        print("Please enter a valid number.")  # Inform user of input error
+    return tasks  # Return updated task list
 
 
  
@@ -89,11 +80,6 @@ def complete(tasks):
 
 
 
-
-# Create a function called complete that takes a lists of tasks,
-# displays them to the user, and then lets the user choose one
-# to mark as complete. It will then update the status of the 
-# task in the list and return the updated list.
 
 
 

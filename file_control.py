@@ -1,39 +1,27 @@
-# Create a function called load_tasks that reads tasks from a file
-# into a list and then returns the list.
+FILE_NAME = "tasks.txt"  # Define the filename for task storage
+
 def load_tasks():
- #open the file in read mode
- file = open('tasks.txt','r')
- # creatinf a list to hold records
- task = []
- #read first line
- line = file.readline()
- #loop for task if list is not empty
- while line !='':
-     #secondary list for holding the temporary field
-     new_task =[]
-     #codes for adding and stripping new lines 1-4:
-     new_task.append(line.rstrip('\n'))
-     new_task.append(file.readline().rstrip("\n"))
-     new_task.append(file.readline().rstrip("\n"))
-     new_task.append(file.readline().rstrip("\n"))
-     task.append(new_task)#appending the fields 1-4 to task list
-     #restarting the loop
-     line = file.readline()
- file.close()
+    # Loads tasks from a file and returns them as a list of tuples.
+    tasks = []  # Initialize an empty task list 
+    try:
+        with open(FILE_NAME, "r") as file:  # Open the file in read mode
+            for line in file:  # Iterate through each line in file
+                line = line.strip()  # Remove trailing whitespace/newlines
+                if line:  # Skip empty lines
+                    title, description, due_date, status = line.split("|")  # Split task attributes
+                    tasks.append((title, description, due_date, status))  # Append task tuple to list
+        print("Tasks loaded successfully.")  # Confirm successful loading
+    except FileNotFoundError:  # Handle file not found error
+        print("No saved tasks found. Starting with an empty list.")  # Notify user
+    
+    return tasks  # Return the loaded task list
 
-
-
-
-# Create a function called save_tasks that takes a list of tasks and 
-# writes them to a file for long non-volatile storage.
 def save_tasks(tasks):
- #open file to append
- with open('task.txt','a') as finaletask:
- 
-      finaletask.write(tasks)
-      tasks.append(line.rstrip('\n'))
-      tasks(file.readline().rstrip('\n'))
-      tasks.append(file.readline().rstrip('\n'))
-      tasks.append(file.readline().rstrip('\n'))
-      tasks.append(new_task)
-      line = file.readline()
+    # Saves the list of tasks to a file.
+    
+     with open(FILE_NAME, "w") as file:  # Open the file in write mode
+        for task in tasks:  # Iterate through the list of tasks
+                line = "|".join(task)  # Convert task tuple to pipe-separated string
+                file.write(line + "\n")  # Write the task string to file
+     print("Tasks saved successfully.")  # Confirm successful saving
+    
