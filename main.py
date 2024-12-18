@@ -3,7 +3,7 @@ import file_control
 
 def main():
   # Get tasks from file
-  tasks = load_tasks()
+  tasks = file_control.load_tasks()
 
   # Create loop for menu
   while True:
@@ -24,33 +24,60 @@ def main():
     elif choice == "3":
       complete(tasks)
     elif choice == "4":
-      save_tasks(tasks)
+      file_control.save_tasks(tasks)
       print("Thank you for using Task Tracker.")
       break
     else:
       print("That is not a valid option.")
+def display_tasks(tasks):
+    
+  index = 1  # Initialize index at 1
+  for task in tasks:  # Iterate over the list of tasks
+    print(f"\nTask {index}:")  # Display task number
+    print(f"Title: {task[0]}")  # Display task title
+    print(f"Description: {task[1]}")  # Display task description
+    print(f"Due Date: {task[2]}")  # Display task due date
+    print(f"Status: {task[3]}")  # Display task status
+    index += 1  # Increment task number
+
+def add_tasks(tasks):
+    title = input("Enter task title: ")  # Get task title from user
+    description = input("Enter task description: ")  # Get task description from user
+    due_date = input("Enter due date (YYYY-MM-DD): ")  # Get due date from user
+    task = (title, description, due_date, "Incomplete")  # Create task tuple
+    tasks.append(task)  # Add task tuple to the list
+    return tasks  # Return updated task list
+
+def complete(tasks):
+    
+    return tasks  # Return task list unchanged
+    display_tasks(tasks)  # Display all tasks for selection
+  
+    index = int(input("Enter the task number to mark as complete: ")) - 1  # Get task number, adjust for index
+    if 0 <= index < len(tasks):  # Check if task number is valid
+      task = tasks[index]  # Get selected task
+      tasks[index] = (task[0], task[1], task[2], "Complete")  # Update status to complete
+      print(f"Task '{task[0]}' marked as complete.")  # Confirm task completion
+    else:
+      print("Invalid task number.")  # Inform user of invalid selection
+   
+    return tasks  # Return updated task list
+
+
+ 
+     
+  
+  
 
 
 
-# Create a function called display_tasks that takes a list of taks and
-# displays every task in the list.
 
 
 
 
 
-# Create a function called add_task that takes a list of tasks, prompts
-# the user for another task, and then appends the new tasks to the 
-# end of the list.
 
 
-
-
-
-# Create a function called complete that takes a lists of tasks,
-# displays them to the user, and then lets the user choose one
-# to mark as complete. It will then update the status of the 
-# task in the list and return the updated list.
 
 
 
