@@ -31,14 +31,14 @@ def main():
       print("That is not a valid option.")
 def display_tasks(tasks):
     
-  index = 1  # Initialize task numbering at 1
+  index = 1  # Initialize index at 1
   for task in tasks:  # Iterate over the list of tasks
     print(f"\nTask {index}:")  # Display task number
     print(f"Title: {task[0]}")  # Display task title
     print(f"Description: {task[1]}")  # Display task description
     print(f"Due Date: {task[2]}")  # Display task due date
     print(f"Status: {task[3]}")  # Display task status
-    index += 1  # Increment task numbering
+    index += 1  # Increment task number
 
 def add_tasks(tasks):
     title = input("Enter task title: ")  # Get task title from user
@@ -49,20 +49,18 @@ def add_tasks(tasks):
     return tasks  # Return updated task list
 
 def complete(tasks):
-    if not tasks:  # Check if task list is empty
-        print("No tasks available to mark as complete.")  # Inform user of no tasks
-        return tasks  # Return task list unchanged
+    
+    return tasks  # Return task list unchanged
     display_tasks(tasks)  # Display all tasks for selection
-    try:
-        index = int(input("Enter the task number to mark as complete: ")) - 1  # Get task number, adjust for index
-        if 0 <= index < len(tasks):  # Check if task number is valid
-            task = tasks[index]  # Get selected task
-            tasks[index] = (task[0], task[1], task[2], "Complete")  # Update status to complete
-            print(f"Task '{task[0]}' marked as complete.")  # Confirm task completion
-        else:
-            print("Invalid task number.")  # Inform user of invalid selection
-    except ValueError:  # Catch non-numeric input errors
-        print("Please enter a valid number.")  # Inform user of input error
+  
+    index = int(input("Enter the task number to mark as complete: ")) - 1  # Get task number, adjust for index
+    if 0 <= index < len(tasks):  # Check if task number is valid
+      task = tasks[index]  # Get selected task
+      tasks[index] = (task[0], task[1], task[2], "Complete")  # Update status to complete
+      print(f"Task '{task[0]}' marked as complete.")  # Confirm task completion
+    else:
+      print("Invalid task number.")  # Inform user of invalid selection
+   
     return tasks  # Return updated task list
 
 
